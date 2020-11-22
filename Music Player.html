@@ -1,0 +1,41 @@
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title>Аудио-плеер</title>
+        <link rel="preconnect" href="https://fonts.gstatic.com">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400&display=swap" rel="stylesheet">
+        <link href="Main.css" rel="stylesheet"/>
+    </head>
+    <body>
+        <div id="bg">
+            <div id="blackLayer"></div>
+            <img id ="bg-poster"/>
+        </div>
+       
+        <div id="main">
+            <div id="image">
+                <img id="poster"/>
+            </div>
+            <div id="player">
+                <div id="songTitle">Demo</div>
+                <div id="buttons">
+                    <button id="pre" onclick="previous()"><img src="img/Pre.png" height="90%" width="90%"/></button>
+                    <img id="play" src="img/Play.png" onclick="playOrPauseSong()"/>
+                    <button id="next" onclick="next()"><img src="img/Next.png" height="90%" width="90%"/></button>
+                </div>
+                
+                <div class="bar">
+                    <div id="current-time">00:00</div>
+                    <div id="seek-bar">
+                        <div id="fill"></div>
+                        <div id="handle"></div>
+                    </div>
+                    <div id="song-duration">00:00</div>
+                </div>
+            </div>
+        </div>
+        <div class="volume-bar"></div>
+    </body>
+    <script type="text/javascript" src="js/PlayerModel.js"></script>
+    <script type="text/javascript" src="js/Player.js"></script>    
+</html>
