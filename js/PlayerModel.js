@@ -1,8 +1,10 @@
-var songs = [
-    "Powerwolf - Army of the Night.mp3",
-    "Slipknot - The Devil in I.mp3",
-    "Трофим - Город Сочи.mp3"];
-var posters = ["Poster1.jpg","Poster2.jpg","Poster3.jpg"];
+if (localStorage.getItem('songs')) {
+    songs = localStorage.getItem('songs').split(',');
+} else {
+    var songs = [ "Трофим - Город Сочи.mp3" ];
+}
+
+var posters = [ "Poster3.jpg" ];
 
 var iconsFolder = "img/";
 var songsFolder = "songs/";
@@ -23,6 +25,9 @@ const volumeBarRect = volumeBar.getBoundingClientRect();
 var playBtn = document.getElementById('play');
 var currentTime = document.getElementById('current-time');
 var songDuration = document.getElementById('song-duration');
+
+var inputFileBtn = document.querySelector('.add-plus');
+var filesInput = document.querySelector('.add-file-input');
 
 var poster = document.getElementById('poster');
 var background = document.getElementById('bg-poster');

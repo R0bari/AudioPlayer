@@ -8,6 +8,7 @@ function firstInit() {
     document.addEventListener('keydown', handleKeydown);
     document.addEventListener('keyup', handleKeyup);
     volumeBar.addEventListener('click', handleChangeVolumeClick);
+    inputFileBtn.addEventListener('change', handleChooseFile);
 
     if (localStorage.getItem('currentSong')) {
         currentSong = localStorage.getItem('currentSong');
@@ -28,8 +29,8 @@ function initSong(songToPlay) {
     song.src = songsFolder + songToPlay;
     songTitle.textContent = songToPlay;
     song.volume = 0.5;
-    poster.src = postersFolder +posters[currentSong];
-    background.src = postersFolder + posters[currentSong];
+    poster.src = postersFolder +posters[0];
+    background.src = postersFolder + posters[0];
 }
 
 function prepareSong(songToPlay) {
@@ -52,7 +53,7 @@ function playOrPauseSong(){
 function next(){
     
     currentSong++;
-    if(currentSong > 2){
+    if(currentSong >= songs.length){
         currentSong = 0;
     }
     changeSong(currentSong);
@@ -61,15 +62,15 @@ function previous(){
     
     currentSong--;
     if(currentSong < 0){
-        currentSong = 2;
+        currentSong = songs.length - 1;
     }
     changeSong(currentSong);
 }
 function changeSong(currentSong) {
     prepareSong(songs[currentSong]);
     playBtn.src = iconsFolder + 'Pause.png';
-    poster.src = postersFolder +posters[currentSong];
-    background.src = postersFolder + posters[currentSong];
+    // poster.src = postersFolder + posters[currentSong];
+    // background.src = postersFolder + posters[currentSong];
 
     localStorage.setItem('currentSong', currentSong);
     localStorage.setItem('currentTime', 0);
@@ -131,4 +132,22 @@ function drawVolumeBar() {
     const topPercent = Math.floor((1 - song.volume) * 100) + '%';
     volumeBar.style.background = 'linear-gradient(to top, royalblue ' + lowPercent + 
     ', rgb(195, 204, 231) ' + lowPercent + ')';
+}
+
+function handleChooseFile(event) {
+    console.log(filesInput.files);
+    const files = filesInput.files;
+    if (files.length === 0) {
+        alert("File not chosen!");
+        return;
+    }
+    if (files[0].type !== 'audio/mpeg') {
+        alert("File has a wrong extension!");
+        return;
+    }
+
+    const name = files[0].name;
+    songs.push(name);
+
+    localStorage.setItem('songs', songs);
 }
