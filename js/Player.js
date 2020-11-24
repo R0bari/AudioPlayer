@@ -134,7 +134,7 @@ function drawVolumeBar() {
     ', rgb(195, 204, 231) ' + lowPercent + ')';
 }
 
-function handleChooseFile(event) {
+function handleChooseFile() {
     console.log(filesInput.files);
     const files = filesInput.files;
     if (files.length === 0) {
@@ -147,7 +147,10 @@ function handleChooseFile(event) {
     }
 
     const name = files[0].name;
+    if (songs.includes(name)) {
+        alert("The song \"" + name + "\" is already added");
+        return;
+    }
     songs.push(name);
-
     localStorage.setItem('songs', songs);
 }
